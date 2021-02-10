@@ -1,0 +1,30 @@
+cash addaction ["Rob BW",{
+
+_timer = 10;
+
+while {_timer > 0} do {
+if (player distance cash > 15) exitWith
+{hint "You to far away from the Black Water Robbery it was canceled"};
+
+hint format ["Your Robbing the Black Water: Time left %1", _timer];
+sleep 1;
+_timer = _timer - 1; };
+
+ if (player distance cash < 15)
+
+    then {
+          hint "THE VEHICLE HAS SPAWNED!!!";
+          //selectRandom [B_Heli_Transport_01_F,B_T_LSV_01_armed_F,B_T_LSV_01_armed_F,B_T_LSV_01_armed_F];
+
+          car1 = selectRandom ["B_Heli_Transport_01_F","B_T_LSV_01_armed_F","B_T_LSV_01_armed_F","B_T_LSV_01_armed_F"];
+          car1 createVehicle getMarkerPos "truck1";
+        };
+
+  if (player distance cash => 15)
+
+    then {
+      hint "You to far away from the Black Water Robbery it was canceled";
+        };
+
+
+  }, nil,1.5,true,true,"","true",10,false,"",""];
