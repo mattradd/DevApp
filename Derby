@@ -1,0 +1,82 @@
+player addaction ["Start Event", {
+
+//Send start message
+hint parseText "<t size='2.25'><t color='#E9EF10'><t font='PuristaSemibold'><t underline='1'>
+EVENT STARTING SOON!!!
+</t></t></t></t>
+<br/>
+<br/>
+<t size='1.25'><t color='#DBDCDD'>
+The event is a Demolition Derby with Vans!!!
+</t></t>";
+
+
+joinEvent = false;
+timer = 5;
+eventStart = false;
+
+  player addaction ["Join Event", {
+
+    joinEvent = true;
+
+    hint format ["You have joined the event"];
+
+    }];
+
+  player addaction ["Teleport/Start", {
+    while {joinEvent == true} do {
+
+      if (joinEvent == true) then {
+      hint format ["You will be teleported to the event in %1 seconds", timer];
+
+      sleep 1;
+      timer = timer - 1;
+    };
+
+
+    if (timer == 0) then {
+
+    joinEvent = false;
+    eventStart = true;
+    removeAllWeapons player;
+    removeAllItems player;
+    removeHeadgear player;
+    removeVest player;
+    removeUniform player;
+      player unassignItem "NVGoggles";
+      player removeItem "NVGoggles";
+    removeBackpack player;
+
+    player setPos [23861.5,18104.1,0.00143886];
+
+    hint parseText "<t size='1'><t color='#E9EF10'><t font='PuristaSemibold'>
+    The Event Has Started Go Hop Into A Van!!!
+    </t></t></t>";
+
+    sleep 1;
+
+    "B_G_Van_02_vehicle_F" createVehicle [23836.4,18110.4,0.00143886];
+    "B_G_Van_02_vehicle_F" createVehicle [23839.5,18118,0.00143886];
+    "B_G_Van_02_vehicle_F" createVehicle [23842.9,18126.4,0.00143886];
+    "B_G_Van_02_vehicle_F" createVehicle [23878.6,18104.1,0.00143886];
+    "B_G_Van_02_vehicle_F" createVehicle [23882.8,18120,0.00143886];
+    "B_G_Van_02_vehicle_F" createVehicle [23887.3,18139.8,0.00143886];
+
+    };
+
+    while {eventStart == true} do {
+
+      if (alive player) then {
+
+        hint parseText "<t color='#ff0000'> You have died!! </t>"
+
+      }
+
+    };
+
+  };
+
+}];
+
+
+}];
