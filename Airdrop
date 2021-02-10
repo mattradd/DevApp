@@ -1,1 +1,54 @@
+// Airdrop //
+
+player addAction ["SE", {_r = getPos airdrop; hint format ["%1", _r]}];
+
+player addAction ["Start Airdrop Event", {
+_started = 0;
+
+pos = [[3180.68,12890.7,60],[3184.07,12914.4,60],[3197.91,12899,60]];
+pos1 = [[3180.68,12890.7,0],[3184.07,12914.4,0],[3197.91,12899,0]];
+//[3180.68,12890.7,0.00143886] // [3184.07,12914.4,0.00143743] // [3197.91,12899,0.00143886]
+_loc = selectRandom pos;
+
+hint format ["THE AIRDROP EVENT HAS STARTED AT %1", _loc];
+
+
+airdrop = "C_supplyCrate_F" createVehicle [926.444,6336.41,-0.573907];
+parachute = "B_Parachute_02_F" createVehicle [926.444,6336.41,-0.573907];
+
+_marker = createMarker ["AirdropLoc", _loc];
+_marker setMarkerType "mil_arrow2";
+
+parachute attachTo [airdrop, [0,0,0]];
+
+airdrop setPos _loc;
+_started = 1;
+
+airdrop lockInventory true;
+//LockInventory doesnt show a script, but it does work!!
+
+while {_started == 1} do {
+airdrop setVelocity [0,0,0.05];
+parachute setVelocity [0,0,0.05];
+sleep 0.25;
+
+ if (airdrop distance [3180.68,12890.7,0] <= 2 || airdrop distance [3184.07,12914.4,0]<= 2 || airdrop distance [3197.91,12899,0] <= 2) then {
+   deleteVehicle parachute;
+
+   hint format ["THE AIRDROP HAS LANDED AND WILL UNLOCK IN 5 Seconds"];
+   sleep 5;
+   airdrop lockInventory false;
+
+   hint format ["THE AIRDROP WILL BE DELETED IN 5 SECONDS"];
+   sleep 5;
+   deleteVehicle airdrop;
+ };
+
+};
+
+
+airdrop setVariable ["airdrop",true,true];
+parachute setVariable ["parachute",true,true];
+
+}];
 
