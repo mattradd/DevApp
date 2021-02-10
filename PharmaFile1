@@ -1,0 +1,3 @@
+truck = "O_Truck_03_ammo_F" createVehicle getMarkerPos "jeffSpawn";
+
+truck setVariable ["truck", true, true];
