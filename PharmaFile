@@ -1,0 +1,56 @@
+
+ jeff addaction [ "Spawn Small Pharmaceutical Vehicle", {
+
+_timer = 5;
+weapons1 = ["arifle_MX_ACO_pointer_F","arifle_MX_ACO_F" ];
+//list out all the weapon etc of 5.56 or higher OR list out all weapons below 5.56
+weapons2 = primaryWeapon player;
+
+if (weapons2 in weapons1) then {
+
+ while {_timer > 0} do {
+
+   if (player distance jeff > 10) exitWith
+   {hint "You to far away from the Pharmaceutical Vehicle Spawn!"
+    };
+
+sleep 1;
+_timer = _timer - 1;
+hint format ["The Pharmaceutical Vehicle will Spawn in %1", _timer];
+
+};
+if (_timer == 0) then {
+  hint format ["The Pharmaceutical Vehicle has Spawned!"];
+  execVM "veh.sqf";
+};
+} else {hint "You need a Caliber of 5.56 or higher to start this event!"};
+
+},nil,1.5,true,true,"","true",10,false,"",""];
+
+
+
+
+
+//params ["_target", "_caller", "_actionId", "_arguments"];
+bob addaction ["Sell Vehicle",{
+
+_timer1 = 5;
+
+  if (truck distance bob > 10) then {hint "You are to far away from the Seller"} else {
+  while {truck distance bob <= 10} do {
+
+      if (_timer1 == 0) then {
+        if (truck distance bob <= 10) then {
+            deleteVehicle truck;
+            titleCut ["Money","black in",0];
+         };
+  };
+
+      sleep 1;
+      _timer1 = _timer1 - 1;
+      hint format ["The Pharmaceutical Vehicle will Sell in %1", _timer1];
+
+};
+};
+
+}, nil,1.5,true,true,"","true",5,false,"",""];
